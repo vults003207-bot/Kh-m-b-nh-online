@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="vi"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/layout :: head('Profile')}"></head>
+
+<body class="bg-light">
+
+<div class="container mt-5">
+
+    <div class="card shadow-custom border-0">
+
+        <div class="card-body p-5 text-center">
+
+            <img th:if="${user.avatar != null}"
+     			th:src="@{'/uploads/' + ${user.avatar}}"
+
+     			class="rounded-circle mb-4"
+
+     			width="150"
+     			height="150"
+
+     			style="object-fit:cover;">
+
+			<img th:unless="${user.avatar != null}"
+     			src="https://via.placeholder.com/150"
+
+     			class="rounded-circle mb-4"
+
+     			width="150"
+     			height="150"
+
+     			style="object-fit:cover;">                
+
+            <h2 th:text="${user.fullName}"></h2>
+
+            <p th:text="${user.email}"></p>
+
+            <p>
+                <strong>Phone:</strong>
+                <span th:text="${user.phone}"></span>
+            </p>
+
+            <p>
+                <strong>Address:</strong>
+                <span th:text="${user.address}"></span>
+            </p>
+
+            <p>
+                <strong>Role:</strong>
+                <span th:text="${user.role}"></span>
+            </p>
+
+            <a th:href="@{/profile/edit}"
+               class="btn btn-primary">
+
+                Edit Profile
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

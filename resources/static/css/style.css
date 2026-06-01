@@ -1,0 +1,46 @@
+body{
+    background: #f4f7fb;
+    font-family: Arial, sans-serif;
+}
+
+.card{
+    border-radius: 16px;
+}
+
+.btn{
+    border-radius: 10px;
+}
+
+.shadow-custom{
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.hero-section{
+    background:
+            linear-gradient(
+                    rgba(0,0,0,0.5),
+                    rgba(0,0,0,0.5)
+            ),
+            url('https://images.unsplash.com/photo-1584515933487-779824d29309');
+
+    background-size: cover;
+    background-position: center;
+
+    color: white;
+
+    padding: 120px 0;
+}
+
+.doctor-card img{
+    height: 220px;
+    object-fit: cover;
+}
+
+.sidebar-link{
+    transition: 0.3s;
+}
+
+.sidebar-link:hover{
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+}

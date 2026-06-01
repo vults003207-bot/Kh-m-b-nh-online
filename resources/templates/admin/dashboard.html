@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="vi"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/layout :: head('Admin Dashboard')}"></head>
+
+<body>
+
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-md-2 p-0">
+
+            <div th:replace="~{fragments/admin-sidebar :: sidebar}"></div>
+
+        </div>
+
+        <div class="col-md-10 p-4">
+
+            <h2 class="mb-4 fw-bold">
+
+                Dashboard
+
+            </h2>
+			<div class="mb-4">
+
+    			<a th:href="@{/profile}"
+       			class="btn btn-info">
+
+        		<i class="bi bi-person-circle"></i>
+       			 Profile
+
+    			</a>
+
+			</div>
+            <div class="row">
+
+                <div class="col-md-3 mb-4">
+
+                    <div class="card border-0 shadow-custom bg-primary text-white">
+
+                        <div class="card-body">
+
+                            <h5>Total Users</h5>
+
+                            <h2 th:text="${totalUsers}"></h2>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3 mb-4">
+
+                    <div class="card border-0 shadow-custom bg-success text-white">
+
+                        <div class="card-body">
+
+                            <h5>Total Doctors</h5>
+
+                            <h2 th:text="${totalDoctors}"></h2>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3 mb-4">
+
+                    <div class="card border-0 shadow-custom bg-warning">
+
+                        <div class="card-body">
+
+                            <h5>Total Patients</h5>
+
+                            <h2 th:text="${totalPatients}"></h2>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3 mb-4">
+
+                    <div class="card border-0 shadow-custom bg-danger text-white">
+
+                        <div class="card-body">
+
+                            <h5>Total Appointments</h5>
+
+                            <h2 th:text="${totalAppointments}"></h2>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card shadow-custom border-0 p-4">
+
+                <h4 class="mb-4">
+
+                    Thống kê hệ thống
+
+                </h4>
+
+                <canvas id="dashboardChart"
+                        height="100"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+    const ctx =
+        document.getElementById('dashboardChart');
+
+    new Chart(ctx, {
+
+        type: 'bar',
+
+        data: {
+
+            labels: [
+                'Users',
+                'Doctors',
+                'Patients',
+                'Appointments'
+            ],
+
+            datasets: [{
+
+                label: 'Hospital Data',
+
+                data: [
+                    [[${totalUsers}]],
+                    [[${totalDoctors}]],
+                    [[${totalPatients}]],
+                    [[${totalAppointments}]]
+                ]
+
+            }]
+        }
+
+    });
+
+</script>
+
+</body>
+
+</html>

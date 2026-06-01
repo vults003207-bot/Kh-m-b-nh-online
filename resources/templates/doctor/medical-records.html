@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bệnh án</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+
+    <div class="d-flex justify-content-between mb-4">
+        <h2>Danh sách bệnh án</h2>
+        <a th:href="@{/doctor/dashboard}" class="btn btn-secondary">
+            Dashboard
+        </a>
+    </div>
+
+    <table class="table table-bordered bg-white shadow">
+        <thead class="table-dark">
+        <tr>
+            <th>Bệnh nhân</th>
+            <th>Bác sĩ</th>
+            <th>Triệu chứng</th>
+            <th>Chẩn đoán</th>
+            <th>Đơn thuốc</th>
+            <th>Ngày tạo</th>
+            <th>Thao tác</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="record : ${recordPage.content}">
+            <td th:text="${record.appointment.patient.user.fullName}"></td>
+            <td th:text="${record.appointment.doctor.user.fullName}"></td>
+            <td th:text="${record.symptoms}"></td>
+            <td th:text="${record.diagnosis}"></td>
+            <td th:text="${record.prescription}"></td>
+            <td th:text="${record.createdAt}"></td>
+            <td>
+                <a th:href="@{/doctor/medical-records/edit/{id}(id=${record.id})}"
+                   class="btn btn-warning btn-sm">
+                    Sửa
+                </a>
+                <button
+    				type="button"
+
+    				class="btn btn-danger btn-sm"
+
+    				th:onclick="'deleteRecord(\'/doctor/medical-records/delete/' + ${record.id} + '\')'">
+
+    				Xóa
+
+				</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+
+function deleteRecord(url){
+
+    Swal.fire({
+
+        title: 'Xóa bệnh án?',
+        text: 'Dữ liệu sẽ không thể khôi phục!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'Xóa',
+        cancelButtonText: 'Đóng'
+
+    }).then((result) => {
+
+        if(result.isConfirmed){
+
+            window.location.href = url;
+
+        }
+
+    });
+
+}
+
+</script>
+<div id="loading"
+     style="display:none;
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background:rgba(255,255,255,0.7);
+            z-index:9999;
+            justify-content:center;
+            align-items:center;">
+
+    <div class="spinner-border text-primary"></div>
+
+</div>
+</body>
+</html>
